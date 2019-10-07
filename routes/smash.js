@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+var arreglo = [];
 character = {
     "personajes": [
         {"id":"1", "nombre":"Mario", "franquicia":"Super Mario", "descripcion":"Heroe del nintendo"},
@@ -10,14 +11,19 @@ character = {
 
 
 router.get('/', (req, res, next) => {
+    console.log(character.personajes.length);
     res.status(200).json(character);
 });
 
 router.post('/', (req, res, next) => {
-    res.status(200).json([{
-        id: 1,
-        name: 'Permiso'
-    }]);
+
+    character.personajes.push( { "id":req.body.id,
+                                 "nombre":req.body.nombre,
+                                 "franquicia":req.body.franquicia,
+                                 "descripcion":req.body.descripcion
+});
+
+    res.status(200).json(character);
 });
 
 router.put('/', (req, res, next) => {
