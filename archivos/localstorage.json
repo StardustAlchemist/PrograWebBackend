@@ -1,0 +1,7 @@
+{
+    "personajes": [
+        {"id":"1", "nombre":"Mario", "franquicia":"Super Mario", "descripcion":"Heroe del nintendo"},
+        {"id":"2", "nombre":"Kirby", "franquicia":"Kirby Super Star", "descripcion":"Consentido de Sakurai"},
+        {"id":"3", "nombre":"Fox", "franquicia":"Star Fox", "descripcion":"Lider de Star Fox"}
+    ]
+}
