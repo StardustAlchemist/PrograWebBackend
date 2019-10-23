@@ -1,26 +1,39 @@
 const express = require('express');
 const router = express.Router();
 var storage = require('../archivos/localstorage.json');
+const Personaje = require('../models/characters');
 var arreglo = [];
 var encontrado;
 
 character = storage;
 
 
-router.get('/', (req, res, next) => {
-    console.log(character);
-    res.status(200).json(character);
+router.get('/', async (req, res, next) => {
+    //console.log(character);
+    const personajes = await Personaje.find();
+    //res.status(200).json(character);
+    res.status(200).json(personajes);
 });
 
-router.post('/', (req, res, next) => {
+router.get('/:id', async(req, res, next) => {
+    const personajes = await Personaje.findById(req.params.id);
+    res.json(personajes);
+});
 
-    character.personajes.push( { "id":req.body.id,
+router.post('/', async (req, res, next) => {
+
+    /*character.personajes.push( { "id":req.body.id,
                                  "nombre":req.body.nombre,
                                  "franquicia":req.body.franquicia,
                                  "descripcion":req.body.descripcion
-});
+});*/
 
-    res.status(201).json(character);
+    const personajes = new Personaje(req.body);
+    console.log(req.body);
+    await personajes.save(personajes);
+
+   // res.status(201).json(character);
+   res.status(201).json(personajes);
 });
 
 router.put('/:id', (req, res, next) => {
@@ -65,7 +78,7 @@ router.delete('/:id', (req, res, next) => {
 
     if(encontrado == true)
     {
-        
+
         res.status(204).json(character);
     }
     else

@@ -4,6 +4,7 @@ var smashRouter = require('./routes/smash');
 var createError = require('http-errors');
 var app = express();
 
+const {mongoose} = require('./database');
 //Settings
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
