@@ -36,9 +36,21 @@ router.post('/', async (req, res, next) => {
    res.status(201).json(personajes);
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
 
-    encontrado = false;
+    const {id} = req.params;
+    const personaje = {
+        nombre: req.body.nombre,
+        franquicia: req.body.franquicia,
+        descripcion: req.body.descripcion,
+        imagen: req.body.imagen
+    };
+
+    console.log(personaje);
+    await Personaje.findByIdAndUpdate(id, { $set: personaje }, { new:true} );
+    res.status(201).json({status:"Actualizado"});
+
+    /*encontrado = false;
 
    
     for(var i = 0; i < character.personajes.length; i++)
@@ -59,7 +71,7 @@ router.put('/:id', (req, res, next) => {
     else
     {
         res.status(404).json({"message": "no encontrado"});
-    }
+    }*/
 });
 
 router.delete('/:id', (req, res, next) => {
