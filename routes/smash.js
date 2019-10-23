@@ -3,13 +3,7 @@ const router = express.Router();
 var storage = require('../archivos/localstorage.json');
 var arreglo = [];
 var encontrado;
-/*character = {
-    "personajes": [
-        {"id":"1", "nombre":"Mario", "franquicia":"Super Mario", "descripcion":"Heroe del nintendo"},
-        {"id":"2", "nombre":"Kirby", "franquicia":"Kirby Super Star", "descripcion":"Consentido de Sakurai"},
-        {"id":"3", "nombre":"Fox", "franquicia":"Star Fox", "descripcion":"Lider de Star Fox"}
-    ]
-}*/
+
 character = storage;
 
 
@@ -33,17 +27,20 @@ router.put('/:id', (req, res, next) => {
 
     encontrado = false;
 
+   
     for(var i = 0; i < character.personajes.length; i++)
     {
         if(req.params.id === character.personajes[i].id)
         {
             character.personajes[i] = {"id":req.body.id, "nombre":req.body.nombre, "franquicia":req.body.franquicia, "descripcion":req.body.descripcion}
+            encontrado = true;
         }
     }
 
 
     if(encontrado == true)
     {
+        console.log(character);
         res.status(204).json(character);
     }
     else
@@ -56,6 +53,7 @@ router.delete('/:id', (req, res, next) => {
     
     encontrado = false;
 
+    
     for(var i = 0; i < character.personajes.length; i++)
     {
         if(req.params.id === character.personajes[i].id)
@@ -67,6 +65,7 @@ router.delete('/:id', (req, res, next) => {
 
     if(encontrado == true)
     {
+        
         res.status(204).json(character);
     }
     else

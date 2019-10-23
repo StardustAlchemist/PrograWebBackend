@@ -4,8 +4,9 @@
   "description": "Este es mi backend de mi proyecto de la clase de programación web.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "test": "mocha",
+    "dev": "nodemon app.js",
+    "coverage": "nyc npm run test"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,16 @@
   },
   "homepage": "https://github.com/StardustAlchemist/PrograWebBackend#readme",
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
+    "mocha": "^6.2.2",
+    "mocka": "0.0.1",
     "morgan": "^1.9.1",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.3",
+    "sinon": "^7.5.0"
+  },
+  "devDependencies": {
+    "nyc": "^14.1.1"
   }
 }
