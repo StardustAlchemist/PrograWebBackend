@@ -10,15 +10,16 @@ const getCharacter = (req, res, next) => {
 const getOneCharcter = (req, res, next) => {
   encontrado = false;
 
-  characterList.personajes[0] = {"id":"1", "nombre":"Link", "franquicia":"Legend of Zelda", "descripcion":"Heroe de Nintendo"}
+  //characterList.personajes[0] = {"id":"1", "nombre":"Link", "franquicia":"Legend of Zelda", "descripcion":"Heroe de Nintendo"}
 
+  console.log(characterList);
     for(var i = 0; i < characterList.personajes.length; i++)
     {
-       /* if(req.params.id === characterList.personajes[i].id)
+        if(req.params.id === characterList.personajes[i].id)
         {
-            characterList.personajes[i] = {"id":"1", "nombre":"Link", "franquicia":"Legend of Zelda", "descripcion":"Heroe de Nintendo"}
+            characterList.personajes[i] = {"id":req.body.id, "nombre":req.body.nombre, "franquicia":req.body.franquicia, "descripcion":req.body.descripcion}
             encontrado = true;
-        }*/
+        }
     }
 
 
@@ -28,8 +29,13 @@ const getOneCharcter = (req, res, next) => {
     
 }
 
+addCharacter = (req, res, next) => {
+  
+}
+
   module.exports = {
     characterList,
     getCharacter,
+    addCharacter,
     getOneCharcter
   }
