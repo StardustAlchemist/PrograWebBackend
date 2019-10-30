@@ -3,11 +3,17 @@ var path = require('path');
 var smashRouter = require('./routes/smash');
 var createError = require('http-errors');
 var app = express();
+var redis = require('redis');
 
 const {mongoose} = require('./database');
 //Settings
+var redisClient = redis.createClient();
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
+
+redisClient.on('connect', function() {
+  console.log('Conectado a Redis Server');
+});
 
 //Routes
 app.use('/api/v1/smash', smashRouter);
