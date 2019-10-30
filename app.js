@@ -11,7 +11,10 @@ const {mongoose} = require('./database');
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
 
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 //Routes
 app.use('/api/v1/smash', smashRouter);
