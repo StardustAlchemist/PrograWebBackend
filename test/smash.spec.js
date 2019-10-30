@@ -47,17 +47,16 @@ describe('User Manager', () => {
     const jsonMock = sandbox.stub()
     const reqMock = {
       params: {
-        id: 2
+        id: '1'
       },
       body: {
-          id: 1,
+          id: '1' ,
           nombre: "Link",
           franquicia: "Legend of Zelda",
           descripcion: "Heroe de Nintendo"
       }
     }
     const nextMock = sandbox.stub()
-    
     characters.push({
         "id": "1",
         "nombre": "Link",
@@ -75,5 +74,13 @@ describe('User Manager', () => {
     getOneCharcter(reqMock, resMock, nextMock)
     sinon.assert.calledWith(statusMock, 204)
     sinon.assert.calledWith(jsonMock, characters)
-  })
+  });
+
+  
+  //Agregar Personaje 
+  it('Agregar Personaje', () => {
+    
+  });
+
+
 });
