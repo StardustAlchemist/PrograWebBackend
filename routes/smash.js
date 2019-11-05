@@ -60,11 +60,7 @@ router.get('/:id', async(req, res, next) => {
 
 router.post('/', async (req, res, next) => {
 
-    /*character.personajes.push( { "id":req.body.id,
-                                 "nombre":req.body.nombre,
-                                 "franquicia":req.body.franquicia,
-                                 "descripcion":req.body.descripcion
-});*/
+   
 
     const personajes = new Personaje(req.body);
     console.log(req.body);
@@ -112,9 +108,13 @@ router.put('/:id', async (req, res, next) => {
     }*/
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
     
-    encontrado = false;
+    console.log('backend');
+    await Personaje.findByIdAndRemove(req.params.id);
+    res.status(204).json(character);
+
+    /*encontrado = false;
 
     
     for(var i = 0; i < character.personajes.length; i++)
@@ -134,7 +134,7 @@ router.delete('/:id', (req, res, next) => {
     else
     {
         res.status(404).json({"message": "no encontrado"});
-    }
+    }*/
 
 });
 

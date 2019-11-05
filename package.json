@@ -21,6 +21,7 @@
   "homepage": "https://github.com/StardustAlchemist/PrograWebBackend#readme",
   "dependencies": {
     "chai": "^4.2.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
     "mocha": "^6.2.2",

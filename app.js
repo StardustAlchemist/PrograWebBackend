@@ -3,6 +3,7 @@ var path = require('path');
 var smashRouter = require('./routes/smash');
 var createError = require('http-errors');
 var app = express();
+const cors = require('cors');
 
 const {mongoose} = require('./database');
 
@@ -10,11 +11,12 @@ const {mongoose} = require('./database');
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
+app.use(cors({origin: 'http://localhost:4200'}));
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
-});
+});*/
 
 //Routes
 app.use('/api/v1/smash', smashRouter);
