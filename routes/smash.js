@@ -4,7 +4,7 @@ var storage = require('../archivos/localstorage.json');
 const Personaje = require('../models/characters');
 var redis = require('redis');
 
-var redisClient = redis.createClient({host : 'localhost', port : 6379});
+var redisClient = redis.createClient({host : 'redis', port : 6379});
     redisClient.on('connect', function(err) {
         console.log('Conectado a Redis Server');
 });
