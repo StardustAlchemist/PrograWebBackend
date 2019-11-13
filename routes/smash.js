@@ -2,27 +2,74 @@ const express = require('express');
 const router = express.Router();
 var storage = require('../archivos/localstorage.json');
 const Personaje = require('../models/characters');
-
 var redis = require('redis');
 
-
 var redisClient = redis.createClient({host : 'localhost', port : 6379});
-
-redisClient.on('connect', function() {
-    console.log('Conectado a Redis Server');
+    redisClient.on('connect', function(err) {
+        console.log('Conectado a Redis Server');
 });
+
+var elementosEnRedis;
+
 
 
 var encontrado;
 
 character = storage;
-
+const personajesRedis = [] 
 
 router.get('/', async (req, res, next) => {
 
-
+ const personajes = await Personaje.find();
+ res.json(personajes); 
+ 
+  /*
+  if(elementosEnRedis == 0){
+    console.log('Entro al Primero');
+    personajesRedis = [];
     const personajes = await Personaje.find();
+    //Se empieza a llenar redis
+    for(var i = 0; i < personajes.length ; i++){
+
+        id = personajes[i]._id.toString();
+      
+        redisClient.hmset(id,"_id",id,"nombre",personajes[i].nombre,"franquicia",personajes[i].franquicia.toString(), "descripcion",personajes[i].descripcion.toString(), "imagen",personajes[i].imagen.toString(),function(err,reply) {
+            if(err){
+                console.log(err);
+            }
+           
+            console.log('Se llena redis');
+        }); 
+        elementosEnRedis++;    
+    }
+    //Se termina de llenar redis
+
+
     res.status(200).json(personajes);
+  }
+  else{
+    console.log('Entro al segundo');
+    redisClient.keys('*', function (err, keys) {
+        if (err) {
+            return console.log(err)
+        };
+      
+        for(var i = 0, len = keys.length; i < len; i++) {
+          //console.log(keys[i]);
+          redisClient.hgetall(keys[i],function(err,reply) {
+            if(err){
+               console.log(err);
+            }
+            personajesRedis.push(reply);
+            console.log(reply);
+           });
+        }
+        elementosEnRedis = keys.length;
+      });
+
+      redisClient.expire('*', 30); // Expirty time for 30 seconds.
+      res.json(personajesRedis);
+  }   */
 });
 
 router.get('/:id', async(req, res, next) => {
@@ -110,7 +157,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     
-    console.log('backend');
+    
     await Personaje.findByIdAndRemove(req.params.id);
     res.status(204).json(character);
 
