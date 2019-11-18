@@ -8,8 +8,6 @@ describe('User Manager', () => {
     let characters
     beforeEach(() => {
       characters = []
-      
-
     });
 
     //----------------------------
@@ -31,7 +29,7 @@ describe('User Manager', () => {
     
         //{"id":"1", "nombre":"Mario", "franquicia":"Super Mario", "descripcion":"Heroe del nintendo"}
         characters.push({
-            "nombre": "Fox McCloud",
+            "nombre": "Fox",
             "franquicia": "Star Fox",
             "descripcion": "Lider de Star Fox",
             "imagen": "http://smashbros-ultimate.com/images/char/fox.png"
@@ -40,7 +38,7 @@ describe('User Manager', () => {
               "nombre":"Samus",
               "franquicia":"Metroid",
               "descripcion":"Cazarecompensas de la galaxia",
-              "imagen": "http://smashbros-ultimate.com/images/char/zelda.png",
+              "imagen": "http://smashbros-ultimate.com/images/char/samus.png",
                }
             );
         
